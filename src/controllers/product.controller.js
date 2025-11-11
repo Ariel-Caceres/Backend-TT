@@ -14,6 +14,9 @@ export const productsController = {
         try {
             const producto = await productsService.getProductById(req.params.id)
             console.log("el producto a mostras", producto)
+            if (!producto) {
+                throw new Error("no hay che")
+            }
             res.json(producto)
         } catch (error) {
             res.status(404).json({ error: error.message })
@@ -22,9 +25,11 @@ export const productsController = {
 
     async createProduct(req, res) {
         try {
-            let { price, category, name } = req.body
+            let { price, category, name, price2, price3 } = req.body
             let nuevoProducto = {
                 price: price,
+                price2: price2,
+                price3: price3,
                 category: category,
                 name: name
             }
