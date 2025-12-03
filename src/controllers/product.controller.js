@@ -13,9 +13,9 @@ export const productsController = {
     async getOne(req, res) {
         try {
             const producto = await productsService.getProductById(req.params.id)
-            console.log("el producto a mostras", producto)
+            console.log("el producto a mostrar", producto)
             if (!producto) {
-                throw new Error("no hay che")
+                return res.status(404).json({ error: "Producto no encontrado" });
             }
             res.json(producto)
         } catch (error) {
@@ -25,43 +25,65 @@ export const productsController = {
 
     async createProduct(req, res) {
         try {
-            let { price, category, name, price2, price3 } = req.body
+            let { price, category, name, } = req.body
+            if (!name || !price || !category) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Faltan campos obligatorios"
+                });
+            }
             let nuevoProducto = {
                 price: price,
-                price2: price2,
-                price3: price3,
                 category: category,
                 name: name
             }
             const producto = await productsService.createProduct(nuevoProducto)
-            res.status(200).json({ message: "god" })
+            res.status(201).json({ message: "Producto creado con exito" })
         } catch (error) {
-            res.status(500).json({ error: error.message })
+            res.status(500).json({
+                success: false,
+                message: "Error al crear producto",
+                details: error.message
+            }
+            )
 
         }
     },
+
     async deleteProduct(req, res) {
         try {
             let id = req.params.id
             const productoABorrar = await productsService.deleteProductById(id)
-            res.status(200).json({ message: "god" })
+            res.status(200).json({ message: "Producto borrado con exito" })
 
         } catch (e) {
             res.status(500).json({ error: e.message })
 
         }
     },
+
     async updateProduct(req, res) {
         try {
             let id = req.params.id
             let { name, price, category } = req.body
+            if (!name || !price || !category) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Faltan campos obligatorios"
+                });
+            }
             const productoAActualizar = await productsService.updateProduct(id,
                 {
                     name: name,
                     price: price,
                     category: category
                 })
-            res.status(200).json({ message: "actualizado con exito " })
+
+            res.status(201).json({
+                message: "Producto Aactualizado con éxito",
+                product: productoAActualizar
+            });
+
         } catch (error) {
             res.status(500).json({ error: error.message })
 
