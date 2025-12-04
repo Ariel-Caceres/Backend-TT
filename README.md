@@ -1,49 +1,66 @@
-📦 Backend API – Node.js + Express + JWT
+# 📦 Backend API – Node.js + Express + JWT
 
-Este proyecto es un backend simple desarrollado con Node.js, Express y JWT, pensado como base para autenticación, CRUD de productos y deploy en Render.
+Backend desarrollado con **Node.js**, **Express** y **JWT**, ideal como base para autenticación, CRUD de productos y deployment en **Render**
 
-🚀 Tecnologías utilizadas
+---
 
--Node.js
+## 🚀 Tecnologías utilizadas
 
--Express
+- **Node.js**
+- **Express**
+- **CORS**
+- **dotenv**
+- **Firebase / Firebase Admin**
+- **JSON Web Token (JWT)**
 
--CORS
+---
 
--dotenv
+## 🔐 Autenticación (JWT)
 
--Firebase / Firebase Admin
+Este backend implementa login con generación de tokens JWT.  
+Para acceder a los endpoints protegidos se debe enviar el token en el header:
 
--JSON Web Token (JWT)
+---
 
-🧪 Endpoints principales
-🔑 Login – obtener token JWT
+## 🧪 Endpoints principales
 
-POST /login
+## 📦 Productos
 
-Body esperado:
-{
-"email": "test@gmail.com",
-"password": "123456"
-}
-
-#📦 Productos
-Obtener todos los productos
+📄 Obtener todos los productos
 
 GET /products
 
-Obtener un producto por ID
+🔍 Obtener un producto por ID
 
 GET /products/:id
 
-Crear producto
+➕ Crear producto
 
 POST /products
 
-Actualizar producto
+✏️ Actualizar producto
 
 PUT /products/:id
 
-Eliminar producto
+🗑️ Eliminar producto
 
 DELETE /products/:id
+
+### 🔑 **Login – obtener token JWT**
+
+`POST /login`
+
+#### Body esperado:
+
+```json
+{
+  "email": "test@gmail.com",
+  "password": "123456"
+}
+```
+
+#### Respuesta:
+
+{
+"token": "<jwt_token>"
+}
