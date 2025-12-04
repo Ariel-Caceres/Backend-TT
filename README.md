@@ -28,8 +28,8 @@ Para acceder a los endpoints protegidos se debe enviar el token en el header:
 
 📄 Obtener todos los productos
 
-````bash
-GET /products
+`GET /products`
+
 🔍 Obtener un producto por ID
 
 `GET /products/:id`
@@ -46,8 +46,6 @@ GET /products
 
 `DELETE /products/:id`
 
----
-
 ### 🔑 **Login – obtener token JWT**
 
 `POST /login`
@@ -59,7 +57,7 @@ GET /products
   "email": "test@gmail.com",
   "password": "123456"
 }
-````
+```
 
 #### Respuesta:
 
